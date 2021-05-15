@@ -23,3 +23,15 @@ yarn-debug.log*
 yarn-error.log*
 
 */__pycache__
+
+# Credentials
+docker.env
+
+# Serverless
+.serverless
+
+# Ruby
+**/vendor/bundle
+
+# Lambda layer
+customink/*

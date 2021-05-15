@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    serverless:
+        image: sls-ruby:1.0.0
+        build:
+            context: ./
+            dockerfile: Dockerfile.dev
+            args:
+                NODE_MAJOR_VER: "14"
+                SERVERLESS_VER: "2.41.1"
+                VIPS_VERSION: "8.10.0"
+                S3_BUCKET: "image-resize"
+        volumes:
+            - .:/var/task
+        env_file:
+            - docker.env
+
