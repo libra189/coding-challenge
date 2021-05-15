@@ -34,4 +34,5 @@ docker.env
 **/vendor/bundle
 
 # Lambda layer
-customink/*
+serverless_framework/customink/ruby-vips-lambda/*
+
