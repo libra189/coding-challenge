@@ -3,7 +3,8 @@
 ## 本アプリの概要
 
 AWS LambdaにアプリをCLIからデプロイする
-参考[Serverless Framework & DockerによるローカルフレンドリーなLambda開発・運用 - Zenn.dev](https://zenn.dev/samuraikun/articles/4b5e2becae7c6b)
+
+参考:[Serverless Framework & DockerによるローカルフレンドリーなLambda開発・運用 - Zenn.dev](https://zenn.dev/samuraikun/articles/4b5e2becae7c6b)
 
 
 ## 事前準備
