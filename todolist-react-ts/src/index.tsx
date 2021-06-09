@@ -23,7 +23,7 @@ const App: React.VFC = () => {
    * @param e イベント
    */
   const handleOnSubmit = (
-    e: React.FormEvent<HTMLFormElement | HTMLInputElement | HTMLButtonElement>
+    e: React.FormEvent<HTMLFormElement | HTMLInputElement | HTMLButtonElement>,
   ) => {
     e.preventDefault();
 
@@ -34,13 +34,13 @@ const App: React.VFC = () => {
       value: text,
       id: new Date().getTime(),
       checked: false,
-      removed: false
+      removed: false,
     };
 
     // ステート更新
     setTodos([newTodo, ...todos]);
     setText('');
-  }
+  };
 
   /**
    * タスク名を編集
@@ -57,7 +57,7 @@ const App: React.VFC = () => {
 
     // ステート更新
     setTodos(newTodos);
-  }
+  };
 
   /**
    * タスクの完了/未完了編集
@@ -73,7 +73,7 @@ const App: React.VFC = () => {
     });
 
     setTodos(newTodos);
-  }
+  };
 
   /**
    * タスクの削除/復元
@@ -89,7 +89,7 @@ const App: React.VFC = () => {
     });
 
     setTodos(newTodos);
-  }
+  };
 
   /**
    * 完了済みタスクの削除
@@ -97,7 +97,7 @@ const App: React.VFC = () => {
   const handleOnEmpty = () => {
     const newTodo = todos.filter((todo) => !todo.removed);
     setTodos(newTodo);
-  }
+  };
 
   /**
    * タスクフィルター
@@ -119,7 +119,10 @@ const App: React.VFC = () => {
 
   return (
     <div>
-      <select defaultValue="all" onChange={(e) => setFilter(e.target.value as Filter)}>
+      <select
+        defaultValue="all"
+        onChange={(e) => setFilter(e.target.value as Filter)}
+      >
         <option value="all">すべて</option>
         <option value="checked">完了済み</option>
         <option value="unchecked">未完了</option>
@@ -136,65 +139,63 @@ const App: React.VFC = () => {
           完了済みを削除
         </Button>
       ) : (
-          <form onSubmit={(e) => handleOnSubmit(e)}>
-            <TextField
-              inputProps={{ 'aria-label': 'description' }}
-              disabled={filter === 'checked'}
-              type="text"
-              label="Task"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              disabled={filter === 'checked'}
-              type="submit"
-              onClick={(e) => handleOnSubmit(e)}
-              startIcon={<SaveIcon />}
-              size="small"
-            >
-              追加
-            </Button>
-          </form>
+        <form onSubmit={(e) => handleOnSubmit(e)}>
+          <TextField
+            inputProps={{ 'aria-label': 'description' }}
+            disabled={filter === 'checked'}
+            type="text"
+            label="Task"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={filter === 'checked'}
+            type="submit"
+            onClick={(e) => handleOnSubmit(e)}
+            startIcon={<SaveIcon />}
+            size="small"
+          >
+            追加
+          </Button>
+        </form>
       )}
       <ul>
-        {filteredTodos.map((todo) => {
-          return (
-            <li key={todo.id}>
-              <input
-                disabled={todo.removed}
-                type="checkbox"
-                checked={todo.checked}
-                onChange={() => handleOnCheck(todo.id, todo.checked)}
-              />
-              <Input
-                inputProps={{'aria-label': 'description'}}
-                disabled={todo.checked || todo.removed}
-                type="text"
-                value={todo.value}
-                onChange={(e) => handleOnEdit(todo.id, e.target.value)}
-              />
-              {/* <input
+        {filteredTodos.map((todo) => (
+          <li key={todo.id}>
+            <input
+              disabled={todo.removed}
+              type="checkbox"
+              checked={todo.checked}
+              onChange={() => handleOnCheck(todo.id, todo.checked)}
+            />
+            <Input
+              inputProps={{ 'aria-label': 'description' }}
+              disabled={todo.checked || todo.removed}
+              type="text"
+              value={todo.value}
+              onChange={(e) => handleOnEdit(todo.id, e.target.value)}
+            />
+            {/* <input
                 disabled={todo.checked || todo.removed}
                 type="text"
                 value={todo.value}
                 onChange={(e) => handleOnEdit(todo.id, e.target.value)}
               /> */}
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => handleOnDelete(todo.id, todo.removed)}
-                size="small"
-              >
-                {todo.removed ? '復元' : '削除'}
-              </Button>
-            </li>
-          );
-        })}
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => handleOnDelete(todo.id, todo.removed)}
+              size="small"
+            >
+              {todo.removed ? '復元' : '削除'}
+            </Button>
+          </li>
+        ))}
       </ul>
     </div>
   );
-}
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));
